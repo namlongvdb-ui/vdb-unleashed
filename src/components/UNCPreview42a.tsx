@@ -5,197 +5,202 @@ interface UNCPreview42aProps {
   data: UNCFormData;
 }
 
-const dot = (len: number) => ".".repeat(len);
-
 const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
+  const val = (v: string, fallbackLen = 30) =>
+    v ? <span className="font-medium">{v}</span> : <span className="text-gray-400">{"·".repeat(fallbackLen)}</span>;
+
   return (
     <div
-      className="w-[210mm] bg-white text-black mx-auto shadow-lg print:shadow-none"
+      className="w-[210mm] h-[297mm] bg-white text-black mx-auto shadow-lg print:shadow-none relative overflow-hidden"
       style={{ fontFamily: "'Times New Roman', serif", fontSize: "13px" }}
     >
-      <div className="p-[15mm] pt-[10mm]">
-        {/* Top right - Mẫu số */}
-        <div className="flex justify-end mb-1">
-          <span className="text-xs italic">Mẫu số: C42a-NHPT</span>
+      <div className="px-[18mm] py-[12mm] h-full flex flex-col">
+        {/* Mẫu số top-right */}
+        <div className="text-right text-[11px] italic mb-0">
+          Mẫu số: C42a-NHPT
         </div>
 
-        {/* Header */}
-        <div className="flex items-start mb-1">
-          <div className="w-20 flex flex-col items-center pt-1">
-            <img src={vdbLogo} alt="VDB" className="w-12 h-12 object-contain" />
-            <span className="text-[9px] italic mt-0.5 text-gray-500">Biểu tượng</span>
+        {/* Title row */}
+        <div className="flex items-start">
+          {/* Left spacer for logo */}
+          <div className="w-[70px]" />
+          {/* Center title */}
+          <div className="flex-1 text-center -mt-1">
+            <h1 className="text-[17px] font-bold tracking-[3px] mb-0.5">ỦY NHIỆM CHI</h1>
           </div>
+          {/* Số UNC */}
+          <div className="text-[13px] pt-1 whitespace-nowrap">
+            Số UNC: <span className="inline-block min-w-[80px] border-b border-black text-center">{data.soUNC}</span>
+          </div>
+        </div>
+
+        {/* Subtitle + date row with logo */}
+        <div className="flex items-start mt-0">
+          {/* Logo */}
+          <div className="w-[70px] flex flex-col items-center">
+            <img src={vdbLogo} alt="VDB" className="w-[44px] h-[44px] object-contain" />
+            <span className="text-[8px] italic text-gray-500 mt-0.5">Biểu tượng</span>
+          </div>
+          {/* Center subtitle + date */}
           <div className="flex-1 text-center">
-            <h1 className="text-[18px] font-bold tracking-[2px]">ỦY NHIỆM CHI</h1>
-            <p className="text-[13px] mt-0.5">Chuyển khoản, chuyển tiền thư, điện</p>
+            <p className="text-[13px]">Chuyển khoản, chuyển tiền thư, điện</p>
             <p className="text-[13px] mt-1">
-              Lập ngày: <span className="inline-block w-8 text-center border-b border-black">{data.ngay || dot(4)}</span> tháng <span className="inline-block w-8 text-center border-b border-black">{data.thang || dot(4)}</span> năm <span className="inline-block w-12 text-center border-b border-black">{data.nam || dot(6)}</span>
+              Lập ngày:{" "}
+              <span className="inline-block w-[30px] border-b border-black text-center">{data.ngay}</span>
+              {" "}tháng{" "}
+              <span className="inline-block w-[30px] border-b border-black text-center">{data.thang}</span>
+              {" "}năm{" "}
+              <span className="inline-block w-[40px] border-b border-black text-center">{data.nam}</span>
             </p>
           </div>
-          <div className="w-28 text-right">
-            <p className="text-[13px]">
-              Số UNC: <span className="inline-block w-16 text-center border-b border-black">{data.soUNC || dot(8)}</span>
-            </p>
-          </div>
+          {/* Right spacer */}
+          <div className="w-[100px]" />
         </div>
 
-        {/* Main content */}
-        <div className="flex gap-3 mt-3">
-          {/* Left */}
-          <div className="flex-1">
-            {/* Sender */}
-            <table className="w-full border-collapse border border-black text-[13px]">
-              <tbody>
-                <tr>
-                  <td className="border border-black px-2 py-1.5" colSpan={2}>
-                    Đơn vị trả tiền: <span className="font-medium">{data.donViTraTien || dot(40)}</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border border-black px-2 py-1.5" colSpan={2}>
-                    Số tài khoản: <span className="font-medium">{data.soTaiKhoanTra || dot(44)}</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border border-black px-2 py-1.5" colSpan={2}>
-                    Tại NHPT tỉnh, TP: <span className="font-medium">{data.taiNHPT || dot(38)}</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            {/* Receiver */}
-            <table className="w-full border-collapse border border-black text-[13px] mt-2">
-              <tbody>
-                <tr>
-                  <td className="border border-black px-2 py-1.5" colSpan={2}>
-                    Đơn vị nhận tiền: <span className="font-medium">{data.donViNhanTien || dot(38)}</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border border-black px-2 py-1.5" colSpan={2}>
-                    Số tài khoản: <span className="font-medium">{data.soTaiKhoanNhan || dot(44)}</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border border-black px-2 py-1.5" colSpan={2}>
-                    Tại NH, KB: <span className="font-medium">{data.taiNHKB || dot(20)}</span>
-                    , tỉnh, TP: <span className="font-medium">{data.tinhTP || dot(20)}</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            {/* Amount & Content */}
-            <table className="w-full border-collapse border border-black text-[13px] mt-2">
-              <tbody>
-                <tr>
-                  <td className="border border-black px-2 py-1.5">
-                    Số tiền bằng chữ: <span className="font-medium">{data.soTienBangChu || dot(38)}</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border border-black px-2 py-1.5">
-                    Nội dung thanh toán: <span className="font-medium">{data.noiDungThanhToan || dot(36)}</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          {/* Right panel */}
-          <div className="w-[160px] space-y-2">
-            {/* NHPT GHI */}
-            <div className="border border-black p-2">
-              <p className="font-bold text-center text-[13px] mb-1">NHPT GHI</p>
-              <p className="text-center text-[11px] mb-1">......./......./.......</p>
-              <p className="text-[12px]">Nợ: {dot(16)}</p>
-              <p className="text-[12px] mt-1">Có: {dot(16)}</p>
+        {/* Main body: left fields + right boxes */}
+        <div className="flex mt-3 flex-1">
+          {/* Left fields */}
+          <div className="flex-1 pr-3">
+            {/* Đơn vị trả tiền block */}
+            <div className="border-t border-l border-r border-black">
+              <div className="border-b border-black px-2 py-[5px] text-[13px]">
+                Đơn vị trả tiền: {val(data.donViTraTien, 50)}
+              </div>
+              <div className="border-b border-black px-2 py-[5px] text-[13px]">
+                Số tài khoản: {val(data.soTaiKhoanTra, 54)}
+              </div>
+              <div className="border-b border-black px-2 py-[5px] text-[13px]">
+                Tại NHPT tỉnh, TP: {val(data.taiNHPT, 46)}
+              </div>
             </div>
 
-            {/* NH KBNN GHI */}
+            {/* Đơn vị nhận tiền block */}
+            <div className="border-l border-r border-black mt-[-1px]">
+              <div className="border-b border-black px-2 py-[5px] text-[13px]">
+                Đơn vị nhận tiền: {val(data.donViNhanTien, 48)}
+              </div>
+              <div className="border-b border-black px-2 py-[5px] text-[13px]">
+                Số tài khoản: {val(data.soTaiKhoanNhan, 54)}
+              </div>
+              <div className="border-b border-black px-2 py-[5px] text-[13px]">
+                Tại NH, KB: {val(data.taiNHKB, 22)}{" "}, tỉnh, TP: {val(data.tinhTP, 20)}
+              </div>
+            </div>
+
+            {/* Số tiền & Nội dung block */}
+            <div className="border-l border-r border-b border-black mt-[-1px]">
+              <div className="border-b border-black px-2 py-[5px] text-[13px]">
+                Số tiền bằng chữ: {val(data.soTienBangChu, 48)}
+              </div>
+              <div className="px-2 py-[5px] text-[13px]">
+                Nội dung thanh toán: {val(data.noiDungThanhToan, 44)}
+              </div>
+            </div>
+
+            {/* Signatures: Đơn vị trả tiền + Ngân hàng Phát triển */}
+            <div className="flex border border-black mt-[-1px]">
+              {/* Đơn vị trả tiền */}
+              <div className="flex-1 border-r border-black p-2">
+                <p className="font-bold text-[12px] text-center">Đơn vị trả tiền</p>
+                <div className="flex justify-around mt-1">
+                  <div className="text-center">
+                    <p className="font-bold text-[11px]">Kế toán trưởng</p>
+                    <p className="text-[9px] italic text-gray-500">(Ký tên)</p>
+                    <div className="h-[55px]" />
+                  </div>
+                  <div className="text-center">
+                    <p className="font-bold text-[11px]">Chủ tài khoản</p>
+                    <p className="text-[9px] italic text-gray-500">(Ký, đóng dấu)</p>
+                    <div className="h-[55px]" />
+                  </div>
+                </div>
+              </div>
+              {/* Ngân hàng Phát triển */}
+              <div className="flex-1 p-2">
+                <p className="font-bold text-[12px] text-center">Ngân hàng Phát triển</p>
+                <p className="text-[10px] text-center mt-0.5">Đề nghị NH (KBNN) thanh toán UNC này</p>
+                <p className="text-[10px] text-center">
+                  từ tài khoản số {"·".repeat(30)}
+                </p>
+                <p className="text-[10px] text-center">
+                  Ngày{"·".repeat(5)}tháng{"·".repeat(5)}năm{"·".repeat(7)}
+                </p>
+                <div className="flex justify-around mt-1">
+                  <div className="text-center">
+                    <p className="font-bold text-[11px]">Kế toán</p>
+                    <p className="text-[9px] italic text-gray-500">(Ký tên)</p>
+                    <div className="h-[40px]" />
+                  </div>
+                  <div className="text-center">
+                    <p className="font-bold text-[11px]">Kế toán trưởng</p>
+                    <p className="text-[9px] italic text-gray-500">(Ký, đóng dấu)</p>
+                    <div className="h-[40px]" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* NH KBNN A + B */}
+            <div className="flex mt-6">
+              <div className="flex-1 pr-2">
+                <p className="font-bold text-[11px] text-center">NH, (KBNN) A ghi sổ ngày {"·".repeat(8)}</p>
+                <div className="flex justify-around mt-1">
+                  <div className="text-center">
+                    <p className="font-bold text-[11px]">Kế toán</p>
+                    <p className="text-[9px] italic text-gray-500">(Ký tên)</p>
+                    <div className="h-[50px]" />
+                  </div>
+                  <div className="text-center">
+                    <p className="font-bold text-[11px]">Kế toán trưởng</p>
+                    <p className="text-[9px] italic text-gray-500">(Ký, đóng dấu)</p>
+                    <div className="h-[50px]" />
+                  </div>
+                </div>
+              </div>
+              <div className="flex-1 pl-2">
+                <p className="font-bold text-[11px] text-center">NH, (KBNN) B ghi sổ ngày {"·".repeat(8)}</p>
+                <div className="flex justify-around mt-1">
+                  <div className="text-center">
+                    <p className="font-bold text-[11px]">Kế toán</p>
+                    <p className="text-[9px] italic text-gray-500">(Ký tên)</p>
+                    <div className="h-[50px]" />
+                  </div>
+                  <div className="text-center">
+                    <p className="font-bold text-[11px]">Kế toán trưởng</p>
+                    <p className="text-[9px] italic text-gray-500">(Ký, đóng dấu)</p>
+                    <div className="h-[50px]" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right boxes */}
+          <div className="w-[150px] space-y-0">
+            {/* NHPT GHI */}
             <div className="border border-black p-2">
-              <p className="font-bold text-center text-[13px] mb-1">NH (KBNN) GHI:</p>
-              <p className="text-[12px]">Nợ: {dot(16)}</p>
-              <p className="text-[12px] mt-1">Có: {dot(16)}</p>
+              <p className="font-bold text-center text-[12px]">NHPT GHI</p>
+              <p className="text-center text-[11px] mt-1 mb-1">
+                {"·".repeat(5)}/{" "}{"·".repeat(5)}/{" "}{"·".repeat(5)}
+              </p>
+              <p className="text-[11px] mt-1">Nợ: {"·".repeat(18)}</p>
+              <p className="text-[11px] mt-1.5">Có: {"·".repeat(18)}</p>
+            </div>
+
+            {/* NH (KBNN) GHI */}
+            <div className="border border-black border-t-0 p-2">
+              <p className="font-bold text-center text-[12px]">NH (KBNN) GHI:</p>
+              <p className="text-[11px] mt-1.5">Nợ: {"·".repeat(18)}</p>
+              <p className="text-[11px] mt-1.5">Có: {"·".repeat(18)}</p>
             </div>
 
             {/* SỐ TIỀN BẰNG SỐ */}
-            <div className="border border-black p-2">
-              <p className="font-bold text-center text-[13px] mb-1">SỐ TIỀN BẰNG SỐ</p>
-              <p className="text-center text-[15px] font-bold min-h-[24px]">
-                {data.soTienBangSo || "*" + dot(14) + "*"}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Signatures row 1 */}
-        <div className="flex mt-5 border-t border-black">
-          <div className="flex-1 border-r border-black pt-2 pr-3">
-            <p className="font-bold text-[13px] text-center mb-0.5">Đơn vị trả tiền</p>
-            <div className="flex justify-around">
-              <div className="text-center">
-                <p className="font-bold text-[12px]">Kế toán trưởng</p>
-                <p className="text-[10px] italic text-gray-500">(Ký tên)</p>
-                <div className="h-16" />
-              </div>
-              <div className="text-center">
-                <p className="font-bold text-[12px]">Chủ tài khoản</p>
-                <p className="text-[10px] italic text-gray-500">(Ký, đóng dấu)</p>
-                <div className="h-16" />
-              </div>
-            </div>
-          </div>
-          <div className="flex-1 pt-2 pl-3">
-            <p className="font-bold text-[13px] text-center mb-0.5">Ngân hàng Phát triển</p>
-            <p className="text-[11px] text-center">Đề nghị NH (KBNN) thanh toán UNC này</p>
-            <p className="text-[11px] text-center">từ tài khoản số {dot(24)}</p>
-            <p className="text-[11px] text-center mb-1">Ngày{dot(4)}tháng{dot(4)}năm{dot(6)}</p>
-            <div className="flex justify-around">
-              <div className="text-center">
-                <p className="font-bold text-[12px]">Kế toán</p>
-                <p className="text-[10px] italic text-gray-500">(Ký tên)</p>
-                <div className="h-14" />
-              </div>
-              <div className="text-center">
-                <p className="font-bold text-[12px]">Kế toán trưởng</p>
-                <p className="text-[10px] italic text-gray-500">(Ký, đóng dấu)</p>
-                <div className="h-14" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Signatures row 2 - NH KBNN */}
-        <div className="flex mt-6">
-          <div className="flex-1">
-            <p className="font-bold text-[12px] text-center mb-0.5">NH, (KBNN) A ghi sổ ngày {dot(6)}</p>
-            <div className="flex justify-around">
-              <div className="text-center">
-                <p className="font-bold text-[12px]">Kế toán</p>
-                <p className="text-[10px] italic text-gray-500">(Ký tên)</p>
-                <div className="h-14" />
-              </div>
-              <div className="text-center">
-                <p className="font-bold text-[12px]">Kế toán trưởng</p>
-                <p className="text-[10px] italic text-gray-500">(Ký, đóng dấu)</p>
-                <div className="h-14" />
-              </div>
-            </div>
-          </div>
-          <div className="flex-1">
-            <p className="font-bold text-[12px] text-center mb-0.5">NH, (KBNN) B ghi sổ ngày {dot(6)}</p>
-            <div className="flex justify-around">
-              <div className="text-center">
-                <p className="font-bold text-[12px]">Kế toán</p>
-                <p className="text-[10px] italic text-gray-500">(Ký tên)</p>
-                <div className="h-14" />
-              </div>
-              <div className="text-center">
-                <p className="font-bold text-[12px]">Kế toán trưởng</p>
-                <p className="text-[10px] italic text-gray-500">(Ký, đóng dấu)</p>
-                <div className="h-14" />
+            <div className="border border-black border-t-0 p-2">
+              <p className="font-bold text-center text-[12px]">SỐ TIỀN BẰNG SỐ</p>
+              <div className="mt-1 min-h-[28px] flex items-center justify-center">
+                <span className="text-[14px] font-bold">
+                  {data.soTienBangSo || <span className="text-gray-400">*{"·".repeat(16)}*</span>}
+                </span>
               </div>
             </div>
           </div>
