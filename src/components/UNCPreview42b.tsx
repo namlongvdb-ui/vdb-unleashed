@@ -86,8 +86,8 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
           </div>
 
           {/* Right panel */}
-          <div className="w-[170px] border border-black ml-2">
-            <div className="border-b border-black px-3 py-[8px]">
+          <div className="w-[170px] border border-black ml-2 flex flex-col">
+            <div className="flex-1 border-b border-black px-3 py-[8px] flex flex-col justify-center">
               <p className="font-bold text-center text-[12px]">NHPT GHI</p>
               <p className="text-center text-[11px] mt-2">
                 {dots(6)}/{dots(6)}/{dots(10)}
@@ -95,7 +95,7 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
               <p className="text-[11px] mt-1.5">Nợ:{dots(22)}</p>
               <p className="text-[11px] mt-1.5">Có:{dots(22)}</p>
             </div>
-            <div className="px-3 py-[4px]">
+            <div className="flex-1 px-3 py-[4px] flex flex-col justify-center">
               <p className="font-bold text-center text-[12px]">SỐ TIỀN BẰNG SỐ</p>
               <p className="text-center text-[14px] font-bold mt-1 min-h-[18px]">
                 {data.soTienBangSo || <span>{dots(18)}</span>}
