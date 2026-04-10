@@ -5,8 +5,8 @@ interface UNCPreview42bProps {
   data: UNCFormData;
 }
 
-const Row = ({ label, value }: { label: string; value: string }) => (
-  <div className="border-b border-black px-2 py-[6px] flex items-baseline">
+const Row = ({ label, value, noBorder }: { label: string; value: string; noBorder?: boolean }) => (
+  <div className={`${noBorder ? '' : 'border-b border-black'} px-2 py-[6px] flex items-baseline`}>
     <span className="whitespace-nowrap">{label}</span>
     <span className="flex-1 overflow-hidden" style={{ 
       borderBottom: value ? 'none' : '1px dotted black',
@@ -52,11 +52,11 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
         <div className="flex mt-2">
           {/* Left fields */}
           <div className="flex-1">
-            <Row label="Đơn vị trả tiền:" value={data.donViTraTien} />
-            <Row label="Số tài khoản:" value={data.soTaiKhoanTra} />
+            <Row label="Đơn vị trả tiền:" value={data.donViTraTien} noBorder />
+            <Row label="Số tài khoản:" value={data.soTaiKhoanTra} noBorder />
             <Row label="Tại NHPT tỉnh, TP:" value={data.taiNHPT} />
-            <Row label="Đơn vị nhận tiền:" value={data.donViNhanTien} />
-            <Row label="Số tài khoản:" value={data.soTaiKhoanNhan} />
+            <Row label="Đơn vị nhận tiền:" value={data.donViNhanTien} noBorder />
+            <Row label="Số tài khoản:" value={data.soTaiKhoanNhan} noBorder />
             <div className="border-b border-black px-2 py-[6px] flex items-baseline">
               <span className="whitespace-nowrap">Tại NH, KB:</span>
               <span className="flex-1 overflow-hidden" style={{ 
@@ -74,7 +74,7 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
               </span>
             </div>
             <Row label="Số tiền bằng chữ:" value={data.soTienBangChu} />
-            <div className="border-b border-black px-2 py-[6px] flex items-baseline">
+            <div className="px-2 py-[6px] flex items-baseline">
               <span className="whitespace-nowrap">Nội dung thanh toán:</span>
               <span className="flex-1 overflow-hidden" style={{ 
                 borderBottom: data.noiDungThanhToan ? 'none' : '1px dotted black',
@@ -98,7 +98,7 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
             <div className="px-2 py-[6px]">
               <p className="font-bold text-center text-[12px]">SỐ TIỀN BẰNG SỐ</p>
               <p className="text-center text-[14px] font-bold mt-1 min-h-[22px]">
-                {data.soTienBangSo || <span>*{dots(16)}*</span>}
+                {data.soTienBangSo || <span>{dots(18)}</span>}
               </p>
             </div>
           </div>
