@@ -59,14 +59,14 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
             <Row label="Số tài khoản:" value={data.soTaiKhoanNhan} noBorder />
             <div className="border-b border-black px-2 py-[6px] flex items-baseline">
               <span className="whitespace-nowrap">Tại NH, KB:</span>
-              <span className="flex-1 overflow-hidden" style={{ 
+              <span className="flex-1 min-w-0 break-words" style={{ 
                 borderBottom: data.taiNHKB ? 'none' : '1px dotted black',
                 marginLeft: '2px', minHeight: '14px'
               }}>
                 {data.taiNHKB && <span className="font-medium">{data.taiNHKB}</span>}
               </span>
               <span className="whitespace-nowrap mx-1">,tỉnh, TP:</span>
-              <span className="flex-1 overflow-hidden" style={{ 
+              <span className="flex-1 min-w-0 break-words" style={{ 
                 borderBottom: data.tinhTP ? 'none' : '1px dotted black',
                 marginLeft: '2px', minHeight: '14px'
               }}>
@@ -76,7 +76,7 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
             <Row label="Số tiền bằng chữ:" value={data.soTienBangChu} noBorder />
             <div className="px-2 py-[6px] flex items-baseline">
               <span className="whitespace-nowrap">Nội dung thanh toán:</span>
-              <span className="flex-1 overflow-hidden" style={{ 
+              <span className="flex-1 min-w-0 break-words" style={{ 
                 borderBottom: data.noiDungThanhToan ? 'none' : '1px dotted black',
                 marginLeft: '2px', minHeight: '14px'
               }}>
