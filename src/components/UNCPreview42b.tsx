@@ -6,15 +6,16 @@ interface UNCPreview42bProps {
 }
 
 const Row = ({ label, value, noBorder }: { label: string; value: string; noBorder?: boolean }) => (
-  <div className={`${noBorder ? '' : 'border-b border-black'} px-2 py-[6px] flex items-baseline flex-wrap`}>
+  <div className={`${noBorder ? '' : 'border-b border-black'} px-2 py-[6px]`}>
     <span className="whitespace-nowrap">{label}</span>
-    <span className="flex-1 min-w-0 break-words" style={{ 
+    <span className="break-words" style={{ 
       borderBottom: value ? 'none' : '1px dotted black',
       marginLeft: '2px',
       minHeight: '14px',
-      lineHeight: '14px'
+      lineHeight: '18px',
+      wordBreak: 'break-word',
     }}>
-      {value && <span className="font-medium break-words">{value}</span>}
+      {value && <span className="font-medium">{value}</span>}
     </span>
   </div>
 );
