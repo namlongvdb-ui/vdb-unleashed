@@ -74,7 +74,14 @@ const Index = () => {
       {/* Header */}
       <header className="bg-primary text-primary-foreground px-6 py-3 flex items-center justify-between print:hidden">
         <div className="flex items-center gap-3">
-          <h1 className="text-lg font-bold">Ủy nhiệm chi - VDB</h1>
+          <div>
+            <h1 className="text-lg font-bold">Ủy nhiệm chi - VDB</h1>
+            <div className="overflow-hidden max-w-[300px]">
+              <p className="text-xs text-primary-foreground/70 whitespace-nowrap animate-marquee">
+                Copyright by Trần Nam Long VDB-Chi nhánh Khu vực Bắc Đông Bắc, PGD Cao Bằng
+              </p>
+            </div>
+          </div>
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList className="bg-primary-foreground/10">
               <TabsTrigger value="42a" className="text-primary-foreground/70 data-[state=active]:text-primary data-[state=active]:bg-primary-foreground">
