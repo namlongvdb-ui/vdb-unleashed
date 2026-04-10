@@ -9,13 +9,12 @@ const Row = ({ label, value, noBorder }: { label: string; value: string; noBorde
   <div className={`${noBorder ? '' : 'border-b border-black'} px-2 py-[6px]`}>
     <span className="whitespace-nowrap">{label}</span>
     <span className="break-words" style={{ 
-      borderBottom: value ? 'none' : '1px dotted black',
       marginLeft: '2px',
       minHeight: '14px',
       lineHeight: '18px',
       wordBreak: 'break-word',
     }}>
-      {value && <span className="font-medium">{value}</span>}
+      {value ? <span className="font-medium">{value}</span> : <span style={{ letterSpacing: '1px' }}>{".".repeat(50)}</span>}
     </span>
   </div>
 );
