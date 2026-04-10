@@ -102,6 +102,7 @@ const Index = () => {
             In biểu mẫu
           </Button>
         </div>
+        </div>
       </header>
 
       {/* Split layout */}
