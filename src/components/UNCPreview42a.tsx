@@ -5,8 +5,8 @@ interface UNCPreview42aProps {
   data: UNCFormData;
 }
 
-const Row = ({ label, value }: { label: string; value: string }) => (
-  <div className="border-b border-black px-2 py-[6px] flex items-baseline">
+const Row = ({ label, value, noBorder }: { label: string; value: string; noBorder?: boolean }) => (
+  <div className={`${noBorder ? '' : 'border-b border-black'} px-2 py-[6px] flex items-baseline`}>
     <span className="whitespace-nowrap">{label}</span>
     <span className="flex-1 overflow-hidden" style={{ 
       borderBottom: value ? 'none' : '1px dotted black',
