@@ -5,17 +5,22 @@ interface UNCPreview42aProps {
   data: UNCFormData;
 }
 
+const Dots = () => (
+  <span className="whitespace-nowrap overflow-hidden flex-1" style={{ letterSpacing: '1px' }}>
+    {".".repeat(200)}
+  </span>
+);
+
 const Row = ({ label, value, noBorder }: { label: string; value: string; noBorder?: boolean }) => (
-  <div className={`${noBorder ? '' : 'border-b border-black'} px-2 py-[6px]`}>
+  <div className={`${noBorder ? '' : 'border-b border-black'} px-2 py-[6px] flex items-baseline`}>
     <span className="whitespace-nowrap">{label}</span>
-    <span className="break-words" style={{ 
-      marginLeft: '2px',
-      minHeight: '14px',
-      lineHeight: '18px',
-      wordBreak: 'break-word',
-    }}>
-      {value ? <span className="font-medium">{value}</span> : <span style={{ letterSpacing: '1px' }}>{".".repeat(50)}</span>}
-    </span>
+    {value ? (
+      <span className="break-words ml-[2px]" style={{ lineHeight: '18px', wordBreak: 'break-word' }}>
+        <span className="font-medium">{value}</span>
+      </span>
+    ) : (
+      <Dots />
+    )}
   </div>
 );
 
@@ -60,21 +65,27 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
             {/* Special row with 2 fields */}
             <div className="border-b border-black px-2 py-[6px] flex items-baseline">
               <span className="whitespace-nowrap">Tại NH, KB:</span>
-              <span className="flex-1 min-w-0 break-words" style={{ marginLeft: '2px', minHeight: '14px' }}>
-                {data.taiNHKB ? <span className="font-medium">{data.taiNHKB}</span> : <span style={{ letterSpacing: '1px' }}>{".".repeat(20)}</span>}
-              </span>
+              {data.taiNHKB ? (
+                <span className="ml-[2px] font-medium">{data.taiNHKB}</span>
+              ) : (
+                <span className="whitespace-nowrap overflow-hidden flex-1" style={{ letterSpacing: '1px' }}>{".".repeat(200)}</span>
+              )}
               <span className="whitespace-nowrap mx-1">,tỉnh, TP:</span>
-              <span className="flex-1 min-w-0 break-words" style={{ marginLeft: '2px', minHeight: '14px' }}>
-                {data.tinhTP ? <span className="font-medium">{data.tinhTP}</span> : <span style={{ letterSpacing: '1px' }}>{".".repeat(20)}</span>}
-              </span>
+              {data.tinhTP ? (
+                <span className="ml-[2px] font-medium">{data.tinhTP}</span>
+              ) : (
+                <span className="whitespace-nowrap overflow-hidden flex-1" style={{ letterSpacing: '1px' }}>{".".repeat(200)}</span>
+              )}
             </div>
             <Row label="Số tiền bằng chữ:" value={data.soTienBangChu} noBorder />
             {/* Last row */}
-            <div className="px-2 py-[6px]">
+            <div className="px-2 py-[6px] flex items-baseline">
               <span className="whitespace-nowrap">Nội dung thanh toán:</span>
-              <span className="break-words" style={{ marginLeft: '2px', minHeight: '14px', lineHeight: '18px', wordBreak: 'break-word' }}>
-                {data.noiDungThanhToan ? <span className="font-medium">{data.noiDungThanhToan}</span> : <span style={{ letterSpacing: '1px' }}>{".".repeat(50)}</span>}
-              </span>
+              {data.noiDungThanhToan ? (
+                <span className="break-words ml-[2px] font-medium" style={{ lineHeight: '18px', wordBreak: 'break-word' }}>{data.noiDungThanhToan}</span>
+              ) : (
+                <Dots />
+              )}
             </div>
           </div>
 
